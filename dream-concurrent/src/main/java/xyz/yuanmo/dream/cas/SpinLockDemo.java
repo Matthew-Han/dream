@@ -1,8 +1,7 @@
-package xyz.yuanmo.dream.java.cas;
+package xyz.yuanmo.dream.cas;
 
 import lombok.SneakyThrows;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -19,10 +18,10 @@ public class SpinLockDemo {
     public void lock() {
         Thread thread = Thread.currentThread();
         while (!atomicReference.compareAndSet(null, thread)) {
-            //System.out.println("atomicReference.get() = " + atomicReference.get());
+            System.out.println(thread.getName() + " atomicReference.get() = " + atomicReference.get());
         }
         System.out.println(thread.getName() + " lock = " + atomicReference.get());
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(2);
     }
 
     @SneakyThrows
@@ -30,7 +29,7 @@ public class SpinLockDemo {
         Thread thread = Thread.currentThread();
         atomicReference.compareAndSet(thread, null);
         System.out.println(thread.getName() + " unlock = " + atomicReference.get());
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(1);
 
     }
 
@@ -56,7 +55,7 @@ public class SpinLockDemo {
             demo.unlock();
         }, "t1").start();
 
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(1);
         new Thread(() -> {
             demo.lock();
             demo.unlock();

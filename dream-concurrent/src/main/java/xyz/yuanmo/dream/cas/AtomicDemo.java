@@ -1,4 +1,4 @@
-package xyz.yuanmo.dream.java.cas;
+package xyz.yuanmo.dream.cas;
 
 import lombok.SneakyThrows;
 import java.util.concurrent.TimeUnit;

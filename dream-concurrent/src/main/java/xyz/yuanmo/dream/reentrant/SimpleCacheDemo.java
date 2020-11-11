@@ -1,4 +1,4 @@
-package xyz.yuanmo.dream.java.reentrant;
+package xyz.yuanmo.dream.reentrant;
 
 import lombok.SneakyThrows;
 import java.util.HashMap;
@@ -16,7 +16,6 @@ public class SimpleCacheDemo<K, V> {
     private final HashMap<K, V> cache;
     private final ReentrantReadWriteLock.ReadLock readLock;
     private final ReentrantReadWriteLock.WriteLock writeLock;
-
 
     /**
      * 读 - 读 共享

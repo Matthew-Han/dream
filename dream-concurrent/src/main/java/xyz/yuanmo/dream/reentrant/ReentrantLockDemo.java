@@ -1,4 +1,4 @@
-package xyz.yuanmo.dream.java.reentrant;
+package xyz.yuanmo.dream.reentrant;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
  * @date 2020/10/22 10:17
  **/
 public class ReentrantLockDemo {
-
 
     /**
      * 这里用reentrantLock结果也是一样的
@@ -37,6 +36,8 @@ public class ReentrantLockDemo {
      * @param args
      */
     public static void main(String[] args) {
+        System.out.println(match("fred", "freh"));
+
         Phone phone = new Phone();
         new Thread(() -> {
             phone.sendMsg();
@@ -46,5 +47,19 @@ public class ReentrantLockDemo {
             phone.sendSms();
         }, "t2").start();
 
+    }
+    public static boolean match(String currWord, String targetWord) {
+        int[] bucket = new int[26];
+        char[] curr = currWord.toCharArray();
+        char[] target = targetWord.toCharArray();
+        for (int i = 0; i < currWord.length(); i++) {
+            bucket[currWord.charAt(i) - 'a']++;
+            bucket[targetWord.charAt(i) - 'a']--;
+        }
+        int count = 0;
+        for (int n : bucket) {
+            count += (n == 0 ? 0 : 1);
+        }
+        return count == 2;
     }
 }

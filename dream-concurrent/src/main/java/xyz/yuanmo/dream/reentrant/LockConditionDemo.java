@@ -1,4 +1,4 @@
-package xyz.yuanmo.dream.java.reentrant;
+package xyz.yuanmo.dream.reentrant;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -26,7 +26,6 @@ public class LockConditionDemo {
         number = 0;
     }
 
-
     private void printNo(int no, int max) {
         lock.lock();
         try {
@@ -34,11 +33,10 @@ public class LockConditionDemo {
                 conditions[no].await();
             }
             for (int i = 0; i < no; i++) {
-                System.out.println(Thread.currentThread().getName() + "fuck babe");
+                System.out.println(Thread.currentThread().getName() + "\tfuck babe");
             }
             number++;
             conditions[number % max].signal();
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -51,9 +49,8 @@ public class LockConditionDemo {
         LockConditionDemo demo = new LockConditionDemo(count);
         for (int i = 0; i < count; i++) {
             int no = i;
-            int max = count;
             new Thread(() -> {
-                demo.printNo(no, max);
+                demo.printNo(no, count);
             }, "t" + i).start();
         }
     }

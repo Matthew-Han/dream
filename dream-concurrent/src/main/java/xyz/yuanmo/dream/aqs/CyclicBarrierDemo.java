@@ -1,4 +1,4 @@
-package xyz.yuanmo.dream.java.aqs;
+package xyz.yuanmo.dream.aqs;
 
 import lombok.SneakyThrows;
 import java.util.concurrent.CyclicBarrier;
@@ -11,13 +11,14 @@ import java.util.concurrent.CyclicBarrier;
  **/
 public class CyclicBarrierDemo {
 
+    private static final int BYD_COUNT = 7;
+
     @SneakyThrows
     public static void main(String[] args) {
-
-        CyclicBarrier cyclicBarrier = new CyclicBarrier(7, new Thread(() -> {
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(BYD_COUNT, new Thread(() -> {
             System.out.println("李赣：BYD都到齐了，火速开会！");
         }, "main"));
-        String[] byd = new String[7];
+        String[] byd = new String[BYD_COUNT];
         byd[0] = "黑狗";
         byd[1] = "强明星";
         byd[2] = "卷董";

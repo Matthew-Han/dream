@@ -34,7 +34,7 @@ public class RedisOperation {
      *
      * @return
      */
-    @Bean(autowireCandidate = false)
+    // @Bean
     public Object hashRedisValue() {
         for (int i = 1; i <= DATA_COUNT; i++) {
             //redisBase.valueOps.set(packageId(i), "图片id：" + i);
@@ -51,7 +51,7 @@ public class RedisOperation {
      *
      * @return
      */
-    @Bean(autowireCandidate = false)
+    // @Bean
     public Object zSetRedisValue() {
         Set<ZSetOperations.TypedTuple<String>> set = new HashSet<>();
         redisBase.zSetOps.add("key1", "value11", 100);

@@ -1,4 +1,4 @@
-package xyz.yuanmo.dream.java.aqs;
+package xyz.yuanmo.dream.aqs;
 
 import lombok.SneakyThrows;
 import java.util.concurrent.CountDownLatch;
@@ -11,11 +11,11 @@ import java.util.concurrent.CountDownLatch;
  **/
 public class CountDownLatchDemo {
 
+    private static final int COUNT = 5;
 
     @SneakyThrows
     public void simpleDemo() {
-        final int count = 5;
-        CountDownLatch countDownLatch = new CountDownLatch(count);
+        CountDownLatch countDownLatch = new CountDownLatch(COUNT);
         for (int i = 0; i < 5; i++) {
             String no = String.valueOf(i);
             new Thread(() -> {

@@ -1,6 +1,7 @@
-package xyz.yuanmo.dream.java.cas;
+package xyz.yuanmo.dream.cas;
 
 import lombok.SneakyThrows;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicStampedReference;
 
@@ -12,9 +13,9 @@ import java.util.concurrent.atomic.AtomicStampedReference;
  **/
 public class AtomicStampedReferenceDemo {
 
-    static AtomicStampedReference<Integer> afNumber;
+    private static AtomicStampedReference<Integer> afNumber;
 
-    int timeStamp;
+    private int timeStamp;
 
     public AtomicStampedReferenceDemo() {
         timeStamp = (int) System.currentTimeMillis();
@@ -46,6 +47,7 @@ public class AtomicStampedReferenceDemo {
 
     @SneakyThrows
     public static void main(String[] args) {
+        new ArrayList<>().iterator();
         AtomicStampedReferenceDemo demo = new AtomicStampedReferenceDemo();
         int version = demo.timeStamp;
         new Thread(() -> {

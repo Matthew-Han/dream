@@ -1,4 +1,4 @@
-package xyz.yuanmo.dream.java.aqs;
+package xyz.yuanmo.dream.aqs;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -11,9 +11,10 @@ import java.util.concurrent.TimeUnit;
  **/
 public class SemaphoreDemo {
 
+    static final int CDC_MC_COUNT = 20;
+    static final int FUCKED = 5;
+
     public static void main(String[] args) {
-        int CDC_MC_COUNT = 20;
-        int FUCKED = 5;
         Semaphore semaphore = new Semaphore(FUCKED);
         for (int i = 0; i < CDC_MC_COUNT; i++) {
             final int no = i;
@@ -26,7 +27,7 @@ public class SemaphoreDemo {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    semaphore.release();
+                    semaphore.release(1);
                 }
             }, String.valueOf(i)).start();
         }

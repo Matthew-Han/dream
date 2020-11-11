@@ -1,4 +1,4 @@
-package xyz.yuanmo.dream.java.other;
+package xyz.yuanmo.dream.other;
 
 import lombok.SneakyThrows;
 import java.util.concurrent.ArrayBlockingQueue;

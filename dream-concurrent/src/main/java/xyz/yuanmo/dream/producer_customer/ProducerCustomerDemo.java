@@ -1,5 +1,6 @@
-package xyz.yuanmo.dream.java.producer_customer;
+package xyz.yuanmo.dream.producer_customer;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -12,17 +13,18 @@ import java.util.concurrent.locks.ReentrantLock;
  **/
 public class ProducerCustomerDemo {
 
-    private char flag = 'B';
+    private volatile boolean flag = false;
     private final Lock lock = new ReentrantLock();
     private final Condition condition = lock.newCondition();
 
     public void autoIncrement() {
         lock.lock();
         try {
-            while (flag != 'B') {
+            while (flag) {
                 condition.await();
             }
-            flag = 'A';
+            TimeUnit.SECONDS.sleep(1L);
+            flag = true;
             System.out.println(Thread.currentThread().getName() + " 改变了flag = " + flag);
             // 一通知，下面就开始工作了
             condition.signalAll();
@@ -38,15 +40,16 @@ public class ProducerCustomerDemo {
     public void autoDecrement() {
         lock.lock();
         try {
-            while (flag != 'A') {
+            while (!flag) {
+                System.out.println("flag = " + flag);
                 condition.await();
             }
-            flag = 'B';
+            flag = false;
             System.out.println(Thread.currentThread().getName() + " 改变了flag = " + flag);
             // 一通知，下面就开始工作了
             condition.signalAll();
 
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             lock.unlock();
