@@ -25,7 +25,7 @@ public class AtomicStampedReferenceDemo {
     }
 
     /**
-     * case：未解决aba问题的cas
+     * case：解决aba问题的case
      */
     public void atomicAba() {
         new Thread(() -> {

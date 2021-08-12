@@ -15,7 +15,7 @@ public class AtomicDemo {
     static AtomicInteger atomicInteger = new AtomicInteger(0);
 
     /**
-     * case：未解决aba问题的cas
+     * case：未解决aba问题的case
      */
     public static void atomicAba() {
         new Thread(() -> {

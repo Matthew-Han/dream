@@ -1,7 +1,9 @@
 package xyz.yuanmo.dream.aqs;
 
 import lombok.SneakyThrows;
+import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Matthew Han
@@ -11,7 +13,7 @@ import java.util.concurrent.CountDownLatch;
  **/
 public class CountDownLatchDemo {
 
-    private static final int COUNT = 5;
+    private static final int COUNT = 6;
 
     @SneakyThrows
     public void simpleDemo() {
@@ -23,11 +25,12 @@ public class CountDownLatchDemo {
                 countDownLatch.countDown();
             }, String.valueOf(i)).start();
         }
+        TimeUnit.SECONDS.sleep(5);
+        System.out.println("countDownLatch.getCount() = " + countDownLatch.getCount());
         countDownLatch.await();
     }
 
     public static void main(String[] args) {
-
         CountDownLatchDemo demo = new CountDownLatchDemo();
         demo.simpleDemo();
         new Thread(() -> {
@@ -35,4 +38,5 @@ public class CountDownLatchDemo {
         }, "t2").start();
 
     }
+
 }
